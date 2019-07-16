@@ -1,0 +1,13 @@
+@import 'variables';
+
+@mixin top-level-content() {
+  @media only screen and (min-width: $break-medium) {
+    width: 976px;
+    margin: 0 auto;
+  }
+
+  @media only screen and (min-width: $break-large) {
+    width: 1248px;
+    margin: 0 auto;
+  }
+}
