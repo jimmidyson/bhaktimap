@@ -21,7 +21,7 @@
       connect-src 'self' https://cdn.jsdelivr.net https://*.googleapis.com https://*.gstatic.com https://d33wubrfki0l68.cloudfront.net;
       manifest-src 'self';
       worker-src 'self';
-      img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com https://developers.google.com;
+      img-src 'self' data: https://*.gstatic.com https://*.googleapis.com https://developers.google.com https://*.ggpht.com;
       '''
 
 [[headers]]
