@@ -6,16 +6,48 @@
 
   export let locations;
 
+  let searchBoxElement;
   let mapElement;
   let googleMap;
 
   loadGoogleMapsApi({
     key: '<@GOOGLE_MAPS_API_KEY@>',
+    libraries: ['places'],
   })
     .then(maps => {
       googleMap = new maps.Map(mapElement, {
         center: new maps.LatLng(0, 0),
         zoom: Math.ceil(Math.log2(window.innerWidth)) - 8,
+        mapTypeId: 'roadmap',
+      });
+
+      // Create the search box and link it to the UI element.
+      const searchBox = new maps.places.SearchBox(searchBoxElement);
+      googleMap.controls[maps.ControlPosition.TOP_LEFT].push(searchBoxElement);
+
+      searchBox.addListener('places_changed', () => {
+        const places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+          return;
+        }
+
+        const bounds = new maps.LatLngBounds();
+        places.forEach(place => {
+          if (!place.geometry) {
+            return;
+          }
+
+          googleMap.setCenter(place.geometry.location);
+
+          if (place.geometry.viewport) {
+            // Only geocodes have viewport.
+            bounds.union(place.geometry.viewport);
+          } else {
+            bounds.extend(place.geometry.location);
+          }
+        });
+        googleMap.fitBounds(bounds);
       });
 
       if (navigator.geolocation) {
@@ -65,4 +97,5 @@
   }
 </style>
 
-<div bind:this={mapElement} />
+<input bind:this={searchBoxElement} class="controls" type="text" placeholder="Search"/>
+<div bind:this={mapElement}/>
