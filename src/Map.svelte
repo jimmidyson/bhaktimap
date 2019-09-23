@@ -89,13 +89,45 @@
     });
 </script>
 
-<style>
-  div {
+<style lang="scss">
+  div.map {
     flex: 1 0 auto;
     height: 100%;
     width: 100%;
+
+    >.controls {
+      display: none;
+    }
+
+    .controls {
+      margin-top: 10px;
+      border: 1px solid transparent;
+      border-radius: 2px 0 0 2px;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      height: 40px;
+      outline: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+      &.searchBox {
+        background-color: #fff;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 50%;
+
+        &:focus {
+          border-color: #4d90fe;
+        }
+      }
+    }
   }
+
 </style>
 
-<input bind:this={searchBoxElement} class="controls" type="text" placeholder="Search"/>
-<div bind:this={mapElement}/>
+<div class="map" bind:this={mapElement}>
+  <input bind:this={searchBoxElement} class="controls searchBox" type="text" placeholder="Search"/>
+</div>
