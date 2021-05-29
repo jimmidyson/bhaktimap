@@ -26,7 +26,7 @@
     "svelte": "^3.12.1",
     "svelte-preprocess": "^3.1.1",
     "typescript": "^3.6.3",
-    "ws": "^7.1.2"
+    "ws": "^7.4.6"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.11.1",
